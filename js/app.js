@@ -1,3 +1,68 @@
+const loadAllPosts = async () => {
+    const res = await fetch("https://openapi.programming-hero.com/api/retro-forum/posts");
+    const data = await res.json();
+    // console.log(data.posts);
+    const allPosts = data.posts;
+    displayAllPosts(allPosts);
+}
+
+const displayAllPosts = allPosts => {
+    const allPostsContainer = document.querySelector("#all-posts-container");
+
+    allPosts.forEach(post => {
+        console.log(post);
+        const { image, category, isActive, title, description,comment_count, view_count, posted_time, author: { name } } = post;
+        const setStatus = isActive ? "bg-[#00A96E]" : "bg-[#FF3434]";
+        const postCard = document.createElement("div");
+        postCard.classList = `bg-[#dcdcdd] mb-6 p-4 md:p-8 flex flex-col lg:flex-row items-center lg:items-start gap-6 rounded-2xl`;
+        postCard.innerHTML = `
+            <div class="lg:w-1/12">
+                <div class="w-16 h-16 bg-white relative rounded-lg">
+                  <div id="status-container"
+                    class="w-4 h-4 ${setStatus} absolute -top-2 -right-2 border rounded-full"
+                  ></div>
+                  <img class="rounded-lg" src="${image}" alt="" />
+                </div>
+              </div>
+              <div class="w-11/12 text-[#12132D]">
+                <div class="flex gap-5 mb-3 opacity-80 text-sm font-medium">
+                  <p># ${category}</p>
+                  <p>Author : ${name ? name : "no data found"}</p>
+                </div>
+                <h3 class="text-lg font-bold mb-4">${title}</h3>
+                <p class="opacity-60">${description}</p>
+                <div
+                  class="border-b border-dashed border-[#12132D40] my-5"
+                ></div>
+                <div class="flex justify-between items-center">
+                  <div class="flex gap-2 md:gap-6 items-center">
+                    <div class="flex items-center gap-2 md:gap-3">
+                      <img src="./images/icons/message.png" alt="" />
+                      <span>${comment_count}</span>
+                    </div>
+                    <div class="flex items-center gap-2 md:gap-3">
+                      <img src="./images/icons/eye.png" alt="" />
+                      <span>${view_count}</span>
+                    </div>
+                    <div class="flex items-center gap-2 md:gap-3">
+                      <img src="./images/icons/clock.png" alt="" />
+                      <span>${posted_time}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <button
+                      class="btn btn-circle text-white bg-[#10B981] hover:bg-[#10B981] text-lg"
+                    >
+                      <i class="fa-solid fa-envelope-open-text"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+        `;
+        allPostsContainer.appendChild(postCard);
+    })
+}
+
 const loadLatestPosts = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/retro-forum/latest-posts");
     const data = await res.json();
@@ -9,7 +74,7 @@ const displayLatestNews = latestNews => {
     const latestNewsContainer = document.querySelector("#latest-news-container");
 
     latestNews.forEach(news => {
-        console.log(news);
+        // console.log(news);
         const { cover_image, title, description, author: { name, designation, posted_date } } = news;
         const newsCard = document.createElement("div");
         newsCard.classList = `card border border-[#12132D26] rounded-2xl p-6`;
@@ -42,4 +107,5 @@ const displayLatestNews = latestNews => {
     })
 }
 
+loadAllPosts();
 loadLatestPosts();
