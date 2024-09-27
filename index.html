@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReTron Forum</title>
+    <!-- font awesome cdn -->
+    <script
+      src="https://kit.fontawesome.com/f3d51a81b3.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- tailwindCss and daisy ui cdn -->
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
@@ -28,7 +33,52 @@
   </head>
   <body class="max-w-[1440px] mx-auto font-mulish">
     <!-- header start -->
-    <header></header>
+    <header class="container mx-auto px-10 lg:px-24">
+      <!-- navbar start -->
+      <nav class="py-6">
+        <div class="navbar bg-base-100">
+          <div class="flex-1">
+            <a class="text-4xl font-black">ReTron</a>
+          </div>
+          <div class="flex-none">
+            <div class="flex items-center mr-8">
+              <button
+                class="btn btn-circle flex justify-center items-center bg-[#0307121A] rounded-full mr-4 tooltip"
+                data-tip="Home"
+              >
+                <img src="./images/icons/home.png" alt="" />
+              </button>
+              <button
+                class="btn btn-circle flex justify-center items-center bg-[#0307121A] rounded-full mr-4 tooltip"
+                data-tip="Edit"
+              >
+                <img src="./images/icons/edit.png" alt="" />
+              </button>
+              <button
+                class="btn btn-circle flex justify-center items-center bg-[#0307121A] rounded-full mr-4 tooltip"
+                data-tip="Add"
+              >
+                <img src="./images/icons/add.png" alt="" />
+              </button>
+              <button
+                class="btn btn-circle flex justify-center items-center bg-[#0307121A] rounded-full tooltip"
+                data-tip="Flag"
+              >
+                <img src="./images/icons/flag.png" alt="" />
+              </button>
+            </div>
+            <div>
+              <button
+                class="btn bg-[#797DFC] text-white hover:bg-[#797DFC] px-10 rounded-full font-bold"
+              >
+                Sign In
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- navbar end -->
+    </header>
     <!-- header end -->
     <!-- main start -->
     <main></main>
