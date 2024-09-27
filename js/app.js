@@ -11,7 +11,7 @@ const displayAllPosts = allPosts => {
 
     allPosts.forEach(post => {
         console.log(post);
-        const { image, category, isActive, title, description,comment_count, view_count, posted_time, author: { name } } = post;
+        const { image, category, isActive, title, description, comment_count, view_count, posted_time, author: { name } } = post;
         const setStatus = isActive ? "bg-[#00A96E]" : "bg-[#FF3434]";
         const postCard = document.createElement("div");
         postCard.classList = `bg-[#dcdcdd] mb-6 p-4 md:p-8 flex flex-col lg:flex-row items-center lg:items-start gap-6 rounded-2xl`;
@@ -50,7 +50,7 @@ const displayAllPosts = allPosts => {
                     </div>
                   </div>
                   <div>
-                    <button
+                    <button onclick="handleRead('${title}', '${view_count}')"
                       class="btn btn-circle text-white bg-[#10B981] hover:bg-[#10B981] text-lg"
                     >
                       <i class="fa-solid fa-envelope-open-text"></i>
@@ -63,12 +63,31 @@ const displayAllPosts = allPosts => {
     })
 }
 
+let count = 0;
+const handleRead = (title, view_count) => {
+    count++;
+    document.querySelector("#read-count").innerText = count;
+    console.log(count);
+    const readMailCardContainer = document.querySelector("#read-mail-container");
+    const readMailCardDiv = document.createElement("div");
+    readMailCardDiv.classList = `flex justify-between p-4 bg-white rounded-2xl`;
+    readMailCardDiv.innerHTML = `
+        <h3 class="font-semibold w-2/3">${title}</h3>
+        <div class="flex items-center gap-1">
+            <img src="./images/icons/eye.png" alt="" />
+            <span>${view_count}</span>
+        </div>
+    `;
+    readMailCardContainer.appendChild(readMailCardDiv);
+}
+
 const loadLatestPosts = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/retro-forum/latest-posts");
     const data = await res.json();
     displayLatestNews(data);
     // console.log(data);
 }
+
 
 const displayLatestNews = latestNews => {
     const latestNewsContainer = document.querySelector("#latest-news-container");
