@@ -1,16 +1,17 @@
 const loadAllPosts = async () => {
+    loadingSpinner(true);
     const res = await fetch("https://openapi.programming-hero.com/api/retro-forum/posts");
     const data = await res.json();
-    // console.log(data.posts);
     const allPosts = data.posts;
-    displayAllPosts(allPosts);
+    displayPosts(allPosts);
 }
 
-const displayAllPosts = allPosts => {
-    const allPostsContainer = document.querySelector("#all-posts-container");
+const displayPosts = allPosts => {
+    
+        const allPostsContainer = document.querySelector("#all-posts-container");
+    allPostsContainer.textContent = "";
 
     allPosts.forEach(post => {
-        console.log(post);
         const { image, id, category, isActive, title, description, comment_count = 0, view_count = 0, posted_time = 0, author: { name = "unknown" } } = post;
 
         const uniqueButtonId = `handle-read-${id}`;
@@ -63,7 +64,8 @@ const displayAllPosts = allPosts => {
               </div>
         `;
         allPostsContainer.appendChild(postCard);
-    })
+    });
+    loadingSpinner(false);
 }
 
 let count = 0;
@@ -83,8 +85,44 @@ const handleRead = (title, view_count, uniqueButtonId) => {
     `;
     readMailCardContainer.appendChild(readMailCardDiv);
     const mailReadButton = document.getElementById(uniqueButtonId);
-    if(mailReadButton){
+    if (mailReadButton) {
         mailReadButton.setAttribute("disabled", true);
+    }
+}
+
+const loadPostsByCategory = async () => {
+    const categoryField = document.querySelector("#category-field");
+    const categoryName = categoryField.value.toLowerCase();
+
+    const allPostsContainer = document.querySelector("#all-posts-container");
+    allPostsContainer.textContent = "";
+
+    loadingSpinner(true);
+
+    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${categoryName}`);
+    const data = await res.json();
+    console.log(data);
+    const categoryPosts = data.posts;
+    const message = data.message;
+
+    if (categoryPosts.length !== 0) {
+        displayPosts(categoryPosts);
+    } else {
+        const notFoundMessage = document.createElement("h2");
+        notFoundMessage.classList = `text-3xl font-semibold`;
+        notFoundMessage.innerText = message;
+        allPostsContainer.appendChild(notFoundMessage);
+        loadingSpinner(false);
+    }
+    categoryField.value = "";
+}
+
+const loadingSpinner = (isLoading) => {
+    const loaderContainer = document.getElementById("loader-container");
+    if (isLoading) {
+        loaderContainer.classList.remove("hidden");
+    } else {
+        loaderContainer.classList.add("hidden");
     }
 }
 
@@ -94,7 +132,6 @@ const loadLatestPosts = async () => {
     displayLatestNews(data);
     // console.log(data);
 }
-
 
 const displayLatestNews = latestNews => {
     const latestNewsContainer = document.querySelector("#latest-news-container");
@@ -132,6 +169,7 @@ const displayLatestNews = latestNews => {
         latestNewsContainer.appendChild(newsCard);
     })
 }
+
 
 loadAllPosts();
 loadLatestPosts();

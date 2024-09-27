@@ -113,11 +113,13 @@
               class="lg:w-9/12 bg-white p-1.5 flex justify-between items-center rounded-full"
             >
               <input
+                id="category-field"
                 type="text"
                 class="w-full outline-none pl-2 md:pl-5 text-[#030712dc] font-medium"
                 placeholder="Search by category"
               />
               <button
+                onclick="loadPostsByCategory()"
                 class="btn btn-sm bg-[#797DFC] text-white hover:bg-[#797DFC] px-6 rounded-full font-bold"
               >
                 Search
@@ -170,15 +172,14 @@
           </p>
         </div>
 
+        <div id="loader-container" class="flex justify-center hidden">
+          <span class="loading loading-bars loading-lg"></span>
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <!-- left side  container -->
           <div id="all-posts-container" class="lg:col-span-2">
-            <!-- card 1 -->
-            <!-- <div
-              class="bg-[#dcdcdd] mb-6 p-4 md:p-8 flex flex-col lg:flex-row items-center lg:items-start gap-6 rounded-2xl"
-            >
-              
-            </div> -->
+            
           </div>
 
           <!-- right side container -->
@@ -189,7 +190,9 @@
               <h3 class="font-bold text-xl">Title</h3>
               <div class="flex gap-2">
                 <img src="./images/icons/check.png" alt="" />
-                <p class="opacity-60">Mark as read (<span id="read-count">0</span>)</p>
+                <p class="opacity-60">
+                  Mark as read (<span id="read-count">0</span>)
+                </p>
               </div>
             </div>
             <div id="read-mail-container" class="flex flex-col gap-4">
@@ -238,9 +241,11 @@
           </p>
         </div>
         <!-- Latest news card container -->
-        <div id="latest-news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          id="latest-news-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           <!-- card 1 -->
-          
         </div>
       </section>
       <!-- Latest Posts section end -->
