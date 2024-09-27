@@ -29,19 +29,29 @@
       .font-mulish {
         font-family: "Mulish", sans-serif;
       }
+      .gradient-text {
+        background: linear-gradient(
+          90deg,
+          #797dfc 0.63%,
+          rgba(121, 125, 252, 0.452) 41%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
     </style>
   </head>
   <body class="max-w-[1440px] mx-auto font-mulish">
     <!-- header start -->
-    <header class="container mx-auto px-10 lg:px-24">
+    <header class="container mx-auto px-4 md:px-10 lg:px-24">
       <!-- navbar start -->
-      <nav class="py-6">
+      <nav class="py-6 md:mb-10">
         <div class="navbar bg-base-100">
           <div class="flex-1">
-            <a class="text-4xl font-black">ReTron</a>
+            <a class="text-3xl lg:text-4xl font-black">ReTron</a>
           </div>
           <div class="flex-none">
-            <div class="flex items-center mr-8">
+            <div class="md:flex items-center mr-8 hidden">
               <button
                 class="btn btn-circle flex justify-center items-center bg-[#0307121A] rounded-full mr-4 tooltip"
                 data-tip="Home"
@@ -78,10 +88,77 @@
         </div>
       </nav>
       <!-- navbar end -->
+      <!-- banner section start -->
+      <section
+        style="background-image: url('./images/bgbanner.png')"
+        class="p-8 md:p-16 lg:p-24 bg-[#12132D] rounded-3xl bg-no-repeat bg-bottom"
+      >
+        <div
+          class="flex flex-col lg:flex-row justify-between items-center gap-10"
+        >
+          <div class="text-white lg:w-7/12 text-center lg:text-start">
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-black lg:leading-[76px] mb-5"
+            >
+              Welcome to the
+              <span class="gradient-text">ReTron</span>
+              Forum
+            </h1>
+            <p class="opacity-80 mb-8">
+              Share your favorite opinion and win and wp
+              <br class="hidden md:block" />
+              forum coffee mug!
+            </p>
+            <div
+              class="lg:w-9/12 bg-white p-1.5 flex justify-between items-center rounded-full"
+            >
+              <input
+                type="text"
+                class="w-full outline-none pl-2 md:pl-5 text-[#030712dc] font-medium"
+                placeholder="Search by category"
+              />
+              <button
+                class="btn btn-sm bg-[#797DFC] text-white hover:bg-[#797DFC] px-6 rounded-full font-bold"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+          <div
+            class="w-full lg:w-5/12 bg-white p-6 md:p-10 rounded-3xl space-y-4"
+          >
+            <div
+              class="flex justify-between items-center text-lg text-[#12132DCC] font-semibold"
+            >
+              <p>Registered Users</p>
+              <p>01</p>
+            </div>
+            <div
+              class="flex justify-between items-center text-lg text-[#12132DCC] font-semibold"
+            >
+              <p>Forum</p>
+              <p>05</p>
+            </div>
+            <div
+              class="flex justify-between items-center text-lg text-[#12132DCC] font-semibold"
+            >
+              <p>Topics</p>
+              <p>01</p>
+            </div>
+            <div
+              class="flex justify-between items-center text-lg text-[#12132DCC] font-semibold"
+            >
+              <p>Replies</p>
+              <p>01</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- banner section end -->
     </header>
     <!-- header end -->
     <!-- main start -->
-    <main></main>
+    <main class="container mx-auto px-4 md:px-10 lg:px-24 my-24"></main>
     <!-- main end -->
     <!-- footer start -->
     <footer></footer>
