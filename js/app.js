@@ -11,7 +11,10 @@ const displayAllPosts = allPosts => {
 
     allPosts.forEach(post => {
         console.log(post);
-        const { image, category, isActive, title, description, comment_count, view_count, posted_time, author: { name } } = post;
+        const { image, id, category, isActive, title, description, comment_count = 0, view_count = 0, posted_time = 0, author: { name = "unknown" } } = post;
+
+        const uniqueButtonId = `handle-read-${id}`;
+
         const setStatus = isActive ? "bg-[#00A96E]" : "bg-[#FF3434]";
         const postCard = document.createElement("div");
         postCard.classList = `bg-[#dcdcdd] mb-6 p-4 md:p-8 flex flex-col lg:flex-row items-center lg:items-start gap-6 rounded-2xl`;
@@ -50,7 +53,7 @@ const displayAllPosts = allPosts => {
                     </div>
                   </div>
                   <div>
-                    <button onclick="handleRead('${title}', '${view_count}')"
+                    <button id="${uniqueButtonId}" onclick="handleRead(\`${title.replace(/'/g, "\\'")}\`, '${view_count}', '${uniqueButtonId}')"
                       class="btn btn-circle text-white bg-[#10B981] hover:bg-[#10B981] text-lg"
                     >
                       <i class="fa-solid fa-envelope-open-text"></i>
@@ -64,10 +67,10 @@ const displayAllPosts = allPosts => {
 }
 
 let count = 0;
-const handleRead = (title, view_count) => {
+const handleRead = (title, view_count, uniqueButtonId) => {
+    console.log(uniqueButtonId);
     count++;
     document.querySelector("#read-count").innerText = count;
-    console.log(count);
     const readMailCardContainer = document.querySelector("#read-mail-container");
     const readMailCardDiv = document.createElement("div");
     readMailCardDiv.classList = `flex justify-between p-4 bg-white rounded-2xl`;
@@ -79,6 +82,10 @@ const handleRead = (title, view_count) => {
         </div>
     `;
     readMailCardContainer.appendChild(readMailCardDiv);
+    const mailReadButton = document.getElementById(uniqueButtonId);
+    if(mailReadButton){
+        mailReadButton.setAttribute("disabled", true);
+    }
 }
 
 const loadLatestPosts = async () => {
